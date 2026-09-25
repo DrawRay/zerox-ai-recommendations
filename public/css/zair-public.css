@@ -1,0 +1,1234 @@
+/**
+ * Zerox AI Recommendations — estilos del frontend.
+ *
+ * Namespace .zair-* en todos los selectores: nunca se usan clases
+ * genéricas (.card, .button, .row) que puedan chocar con Flatsome.
+ *
+ * El carrusel usa scroll-snap nativo: sin Swiper, sin Slick, sin jQuery.
+ * Tipografía y colores heredan del tema para respetar la identidad de
+ * ZEROXMOTORS; solo se define lo estructural.
+ */
+
+/*
+ * Mientras no hay contenido la sección no ocupa espacio. Antes esto se
+ * hacía con el atributo hidden, que el script debía retirar al pintar:
+ * si algo interrumpía ese paso, la sección quedaba invisible aunque los
+ * datos hubieran llegado. Con :empty el navegador la muestra sola en
+ * cuanto hay contenido dentro, sin depender de ninguna instrucción.
+ */
+.zair-recommendations:empty {
+	display: none;
+}
+
+.zair-recommendations {
+	/* Número de tarjetas visibles; se sobrescribe desde el panel. */
+	--zair-cols: 4 !important;
+	--zair-gap: 8px;
+
+	margin: 10px 0;
+	font-family: inherit;
+	color: inherit;
+}
+
+.zair-recommendations *,
+.zair-recommendations *::before,
+.zair-recommendations *::after {
+	box-sizing: border-box;
+}
+
+/* --- Encabezado --- */
+
+.zair-header {
+	margin-bottom: 10px;
+}
+
+.zair-title {
+	font-size: 1rem;
+	font-weight: 700 !important;
+	color: #908f8f !important;
+	margin: 0 0 4px;
+	line-height: 1.3;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	text-transform: none !important;
+	padding-bottom: 0px !important;
+	
+}
+
+.zair-title-icon {
+	flex: 0 0 auto;
+	width: 22px;
+	height: 22px;
+	opacity: .75;
+}
+
+.zair-subtitle {
+	margin: 0;
+	font-size: .95rem;
+	opacity: .72;
+	line-height: 1.45;
+}
+
+.zair-vehicle {
+	font-weight: 600;
+	opacity: 1;
+}
+
+/* --- Carrusel --- */
+
+.zair-carousel-wrap {
+	position: relative;
+}
+
+.zair-carousel {
+	display: flex;
+	gap: var(--zair-gap);
+	overflow-x: auto;
+	scroll-snap-type: x mandatory;
+	scroll-behavior: smooth;
+	/*padding: 4px 2px 14px;*/
+	margin: 0;
+	list-style: none;
+	-webkit-overflow-scrolling: touch;
+	scrollbar-width: thin;
+}
+
+.zair-carousel::-webkit-scrollbar {
+	height: 6px;
+}
+
+.zair-carousel::-webkit-scrollbar-thumb {
+	background: rgba(0, 0, 0, .18);
+	border-radius: 3px;
+}
+
+/* Desktop: ~5 tarjetas visibles. Antes eran 4 y las imágenes quedaban
+   desproporcionadas frente al resto de la ficha. */
+.zair-card {
+	flex: 0 0 calc( ( 100% - ( var(--zair-gap) * ( var(--zair-cols) - 1 ) ) ) / var(--zair-cols) );
+	scroll-snap-align: start;
+	display: flex;
+	flex-direction: column;
+	border: 1px solid rgba(0, 0, 0, .12);
+	border-radius: 6px;
+	background: #fff;
+	overflow: hidden;
+	min-width: 0;
+	margin-left: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.zair-card-media {
+	position: relative;
+	display: block;
+	aspect-ratio: 4 / 3;
+	background: #f6f6f6;
+}
+
+.zair-card-media img {
+	object-fit: contain !important;
+	height: 130px !important;
+	padding: 6px;
+}
+
+
+.zair-card-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.zair-flag-oferta {
+	position: absolute;
+	top: 8px;
+	left: 8px;
+	background: #c0392b;
+	color: #fff;
+	font-size: .68rem;
+	font-weight: 700;
+	letter-spacing: .02em;
+	padding: 3px 8px;
+	border-radius: 3px;
+}
+
+.zair-card-body {
+	padding: 9px 10px 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	flex: 1 1 auto;
+}
+
+.zair-card-name {
+	font-size: .78rem;
+	font-weight: 600;
+	line-height: 1.3;
+	margin: 0;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.zair-card-name a {
+	color: inherit;
+	text-decoration: none;
+}
+
+.zair-card-name a:hover {
+	text-decoration: underline;
+}
+
+.zair-badge-compatible {
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+	align-self: flex-start;
+	font-size: .66rem;
+	font-weight: 600;
+	color: #1a7f47;
+	background: #eaf7ef;
+	border: 1px solid #bfe5cd;
+	border-radius: 3px;
+	padding: 2px 7px;
+	line-height: 1.5;
+}
+
+.zair-card-price {
+	font-size: .88rem;
+	font-weight: 700;
+	margin: 0;
+	line-height: 1.3;
+}
+
+.zair-card-price del {
+	font-weight: 400;
+	font-size: .72rem;
+	opacity: .55;
+	margin-right: 4px;
+}
+
+.zair-card-price ins {
+	text-decoration: none;
+}
+
+.zair-card-actions {
+	margin-top: auto;
+	padding-top: 4px;
+	display: grid;
+	gap: 5px;
+}
+
+/* Botón de cotización: acción principal en un catálogo que trabaja
+   con atención personalizada. */
+.zair-btn-quote {
+	background: #fe5200;
+	border-color: #fe5200;
+	color: #fff;
+}
+
+.zair-btn-quote:hover {
+	opacity: .9;
+}
+
+.zair-btn {
+	display: block;
+	width: 100%;
+	text-align: center;
+	padding: 8px 10px;
+	font-size: .72rem;
+	letter-spacing: .02em;
+	font-weight: 600;
+	line-height: 1.4;
+	border-radius: 4px;
+	border: 1px solid currentColor;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	transition: opacity .15s ease;
+	font-family: inherit;
+}
+
+.zair-btn:hover {
+	opacity: .78;
+}
+
+.zair-btn-primary {
+	background: #111;
+	border-color: #111;
+	color: #fff;
+}
+
+.zair-btn-added {
+	background: #1a7f47;
+	border-color: #1a7f47;
+	color: #fff;
+}
+
+.zair-btn:disabled {
+	cursor: default;
+	opacity: .8;
+}
+
+.zair-cart-link {
+	display: block;
+	text-align: center;
+	font-size: .78rem;
+	margin-top: 6px;
+	text-decoration: underline;
+	color: inherit;
+}
+
+/* --- Flechas (solo desktop) --- */
+
+.zair-nav {
+	position: absolute;
+	top: 34%;
+	width: 36px;
+	height: 36px;
+	border-radius: 50%;
+	border: 1px solid rgba(0, 0, 0, .15);
+	background: #fff;
+	color: #111;
+	font-size: 1.1rem;
+	line-height: 1;
+	cursor: pointer;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 1px 4px rgba(0, 0, 0, .12);
+	z-index: 2;
+}
+
+.zair-nav-prev {
+	left: -14px;
+}
+
+.zair-nav-next {
+	right: -14px;
+}
+
+.zair-nav[hidden] {
+	display: none !important;
+}
+
+@media (min-width: 900px) {
+	.zair-nav {
+		display: flex;
+	}
+}
+
+/* --- Pie de sección --- */
+
+.zair-footer {
+	margin-top: 6px;
+}
+
+.zair-more {
+	background: none;
+	border: 0;
+	padding: 0;
+	font-size: .88rem;
+	font-weight: 600;
+	text-decoration: underline;
+	cursor: pointer;
+	color: inherit;
+	font-family: inherit;
+}
+
+/* --- Accesibilidad --- */
+
+.zair-recommendations :focus-visible {
+	outline: 2px solid #2271b1;
+	outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.zair-carousel {
+		scroll-behavior: auto;
+	}
+
+	.zair-btn {
+		transition: none;
+	}
+}
+
+/* --- Responsive --- */
+
+@media (max-width: 1199px) {
+	/* Tablet: ~4 tarjetas. */
+	.zair-card {
+		/* El ancho lo define --zair-cols. */
+		--zair-cols: 3;
+	}
+}
+
+@media (max-width: 860px) {
+	/* Tablet pequeña: ~2.6 tarjetas. */
+	.zair-card {
+		/* El ancho lo define --zair-cols. */
+	}
+}
+
+@media (max-width: 600px) {
+	/* Móvil: 1.35 tarjetas — el corte indica que hay más al deslizar. */
+	.zair-recommendations {
+		margin: 28px 0;
+	}
+	.zair-card-media img{
+	    height: 100% !important;
+	}
+	
+
+	.zair-card {
+		/* El ancho lo define --zair-cols. */
+	}
+
+	.zair-title {
+		font-size: 1.15rem;
+	}
+
+	.zair-subtitle {
+		font-size: .88rem;
+	}
+}
+
+/* ---------------------------------------------------------------
+ * Captura de leads (Fase 7)
+ * ------------------------------------------------------------ */
+
+.zair-lead {
+	margin-top: 18px;
+	border: 1px solid rgba(0, 0, 0, .12);
+	border-radius: 6px;
+	overflow: hidden;
+	background: #fafafa;
+}
+
+.zair-lead-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	width: 100%;
+	padding: 14px 16px;
+	background: none;
+	border: 0;
+	cursor: pointer;
+	text-align: left;
+	font-family: inherit;
+	color: inherit;
+	flex-wrap: wrap;
+}
+
+.zair-lead-question {
+	font-size: .95rem;
+	font-weight: 600;
+	line-height: 1.4;
+}
+
+.zair-lead-cta {
+	font-size: .85rem;
+	font-weight: 600;
+	text-decoration: underline;
+	white-space: nowrap;
+	flex: 0 0 auto;
+}
+
+.zair-lead-panel {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height .26s ease;
+	border-top: 1px solid rgba(0, 0, 0, .08);
+	background: #fff;
+}
+
+.zair-lead-inner {
+	padding: 16px;
+	display: grid;
+	gap: 12px;
+	max-width: 480px;
+}
+
+.zair-field {
+	display: grid;
+	gap: 4px;
+}
+
+.zair-field label {
+	font-size: .82rem;
+	font-weight: 600;
+	opacity: .8;
+}
+
+.zair-field input {
+	width: 100%;
+	padding: 9px 11px;
+	font-size: .92rem;
+	font-family: inherit;
+	border: 1px solid rgba(0, 0, 0, .22);
+	border-radius: 4px;
+	background: #fff;
+	color: inherit;
+}
+
+.zair-field input:focus {
+	border-color: #111;
+	outline: 2px solid rgba(0, 0, 0, .12);
+	outline-offset: 1px;
+}
+
+.zair-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 8px;
+	font-size: .8rem;
+	line-height: 1.45;
+	opacity: .85;
+	cursor: pointer;
+}
+
+.zair-consent input {
+	margin-top: 2px;
+	flex: 0 0 auto;
+}
+
+.zair-lead-submit {
+	width: auto;
+	justify-self: start;
+	padding: 10px 22px;
+}
+
+.zair-honeypot {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.zair-lead-msg {
+	margin: 0;
+	font-size: .84rem;
+	line-height: 1.45;
+	min-height: 1px;
+}
+
+.zair-lead-msg-error {
+	color: #b32d2e;
+}
+
+.zair-lead-msg-ok {
+	color: #1a7f47;
+}
+
+.zair-lead-done-title {
+	margin: 0;
+	font-size: 1rem;
+	font-weight: 700;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.zair-lead-panel {
+		transition: none;
+	}
+}
+
+@media (max-width: 600px) {
+	.zair-lead-toggle {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 6px;
+	}
+
+	.zair-lead-submit {
+		width: 100%;
+	}
+}
+
+/* ---------------------------------------------------------------
+ * Selección múltiple: tarjetas compactas con casilla.
+ * Pensado para un negocio que vende por cotización: el cliente
+ * marca varios repuestos y pide una sola consulta del conjunto.
+ * ------------------------------------------------------------ */
+
+.zair-combo {
+	gap: 12px;
+}
+
+.zair-ccard {
+	flex: 0 0 calc( ( 100% - ( var(--zair-gap) * ( var(--zair-cols) - 1 ) ) ) / var(--zair-cols) );
+	scroll-snap-align: start;
+	min-width: 0;
+	display: flex;
+	flex-direction: column;
+}
+
+.zair-ccard-inner {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+	padding: 10px 10px 12px;
+	border: 1px solid rgba(0, 0, 0, .12);
+	border-radius: 7px;
+	background: #fff;
+	cursor: pointer;
+	height: 100%;
+	transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.zair-ccard-inner:hover {
+	border-color: rgba(0, 0, 0, .3);
+}
+
+.zair-ccard.is-checked .zair-ccard-inner {
+	border-color: #fe5200;
+	box-shadow: 0 0 0 2px rgba(254, 82, 0, .16);
+}
+
+.zair-ccard-chk {
+	position: absolute;
+	top: 9px;
+	left: 9px;
+	z-index: 2;
+	width: 20px;
+	height: 20px;
+	margin: 0;
+	accent-color: #fe5200;
+	cursor: pointer;
+}
+
+.zair-ccard-media {
+	position: relative;
+	display: block;
+	aspect-ratio: 1 / 1;
+	background: #f6f6f6;
+	border-radius: 4px;
+	overflow: hidden;
+}
+
+.zair-ccard-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.zair-ccard-flag {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	background: #c0392b;
+	color: #fff;
+	font-size: .62rem;
+	font-weight: 700;
+	padding: 2px 6px;
+	border-radius: 3px;
+	z-index: 1;
+}
+
+.zair-ccard-name {
+	font-size: .8rem;
+	font-weight: 600;
+	line-height: 1.3;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.zair-ccard-badge {
+	align-self: flex-start;
+	font-size: .66rem;
+	font-weight: 600;
+	color: #1a7f47;
+	background: #eaf7ef;
+	border: 1px solid #bfe5cd;
+	border-radius: 3px;
+	padding: 1px 6px;
+}
+
+.zair-ccard-price {
+	font-size: .88rem;
+	font-weight: 700;
+	margin-top: auto;
+}
+
+.zair-ccard-price del {
+	font-weight: 400;
+	font-size: .74rem;
+	opacity: .55;
+	margin-right: 3px;
+}
+
+.zair-ccard-price ins {
+	text-decoration: none;
+}
+
+.zair-ccard-link {
+	display: block;
+	text-align: center;
+	font-size: .7rem;
+	margin-top: 5px;
+	text-decoration: underline;
+	color: inherit;
+	opacity: .65;
+}
+
+.zair-ccard-link:hover {
+	opacity: 1;
+}
+
+/* --- Barra de acción --- */
+
+.zair-combo-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 14px;
+	flex-wrap: wrap;
+	margin-top: 12px;
+	padding: 12px 16px;
+	background: #f7f8fa;
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 7px;
+}
+
+.zair-combo-bar[hidden] {
+	display: none;
+}
+
+.zair-combo-count {
+	font-size: .88rem;
+	font-weight: 600;
+}
+
+.zair-combo-btn {
+	width: auto;
+	min-width: 240px;
+	background: #fe5200;
+	border-color: #fe5200;
+	border-radius: 7px;
+	padding: 12px 26px;
+	letter-spacing: .02em;
+}
+
+@media (max-width: 1199px) {
+	.zair-ccard {
+		/* El ancho lo define --zair-cols. */
+	}
+}
+
+@media (max-width: 860px) {
+	.zair-ccard {
+		/* El ancho lo define --zair-cols. */
+	}
+}
+
+@media (max-width: 600px) {
+	.zair-ccard {
+		/* El ancho lo define --zair-cols. */
+	}
+
+	.zair-combo-bar {
+		flex-direction: column;
+		align-items: stretch;
+		text-align: center;
+	}
+
+	.zair-combo-btn {
+		width: 100%;
+		min-width: 0;
+	}
+}
+
+/* ===============================================================
+ * Modo combo: selección múltiple para cotizar varios repuestos
+ * en una sola solicitud. Pensado para ir en la columna del
+ * producto, junto al precio, sin ocupar demasiada altura.
+ * ============================================================ */
+
+.zair-combo {
+	border: 1px solid rgba(0, 0, 0, .1);
+	border-radius: 8px;
+	background: #fafbfc;
+	padding: 16px 16px 14px;
+}
+
+.zair-combo-head {
+	margin-bottom: 12px;
+}
+
+.zair-combo-title {
+	margin: 0 0 2px;
+	font-size: 1.02rem;
+	font-weight: 700;
+	line-height: 1.3;
+	color: inherit;
+}
+
+.zair-combo-sub {
+	margin: 0;
+	font-size: .78rem;
+	opacity: .62;
+	line-height: 1.45;
+}
+
+.zair-combo-list {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	background: #fff;
+	border: 1px solid rgba(0, 0, 0, .09);
+	border-radius: 6px;
+	overflow: hidden;
+	max-height: 330px;
+	overflow-y: auto;
+}
+
+.zair-combo-item {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid #f1f3f5;
+	margin: 0;
+}
+
+.zair-combo-item:last-child {
+	border-bottom: 0;
+}
+
+.zair-combo-item:hover {
+	background: #fbfcfd;
+}
+
+.zair-combo-label {
+	display: flex;
+	align-items: center;
+	gap: 11px;
+	flex: 1 1 auto;
+	padding: 10px 6px 10px 12px;
+	cursor: pointer;
+	min-width: 0;
+	margin: 0;
+}
+
+.zair-combo-check {
+	flex: 0 0 auto;
+	width: 17px;
+	height: 17px;
+	accent-color: #fe5200;
+	cursor: pointer;
+	margin: 0;
+}
+
+.zair-combo-media {
+	flex: 0 0 auto;
+	width: 42px;
+	height: 42px;
+	border-radius: 4px;
+	overflow: hidden;
+	background: #f4f5f7;
+}
+
+.zair-combo-media img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.zair-combo-info {
+	flex: 1 1 auto;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.zair-combo-name {
+	font-size: .82rem;
+	font-weight: 600;
+	line-height: 1.3;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+}
+
+.zair-combo-badge {
+	font-size: .67rem;
+	font-weight: 600;
+	color: #1a7f47;
+	line-height: 1.4;
+}
+
+.zair-combo-price {
+	flex: 0 0 auto;
+	font-size: .82rem;
+	font-weight: 700;
+	white-space: nowrap;
+	text-align: right;
+}
+
+.zair-combo-price del {
+	display: none; /* En la lista solo interesa el precio vigente. */
+}
+
+.zair-combo-price ins {
+	text-decoration: none;
+}
+
+.zair-combo-link {
+	flex: 0 0 auto;
+	padding: 10px 12px;
+	font-size: 1.2rem;
+	line-height: 1;
+	color: #b9bfc7;
+	text-decoration: none;
+}
+
+.zair-combo-link:hover {
+	color: #fe5200;
+}
+
+.zair-combo-more {
+	display: block;
+	width: 100%;
+	margin-top: 10px;
+	padding: 9px;
+	background: none;
+	border: 1px dashed rgba(0, 0, 0, .18);
+	border-radius: 6px;
+	font-family: inherit;
+	font-size: .78rem;
+	font-weight: 600;
+	color: inherit;
+	opacity: .72;
+	cursor: pointer;
+}
+
+.zair-combo-more:hover {
+	opacity: 1;
+	border-color: #fe5200;
+	color: #fe5200;
+}
+
+/* Barra de acción: solo visible con algo marcado. */
+
+.zair-combo-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	margin-top: 12px;
+	padding-top: 12px;
+	border-top: 1px solid rgba(0, 0, 0, .09);
+	flex-wrap: wrap;
+}
+
+.zair-combo-bar[hidden] {
+	display: none;
+}
+
+.zair-combo-count {
+	font-size: .8rem;
+	font-weight: 600;
+	opacity: .75;
+}
+
+.zair-combo-btn {
+	flex: 1 1 auto;
+	min-width: 190px;
+	padding: 12px 20px;
+	background: #fe5200;
+	color: #fff;
+	border: 0;
+	border-radius: 7px;
+	font-family: inherit;
+	font-size: .82rem;
+	font-weight: 700;
+	letter-spacing: .03em;
+	cursor: pointer;
+	box-shadow: 0 3px 12px rgba(254, 82, 0, .26);
+}
+
+.zair-combo-btn:hover {
+	filter: brightness(.94);
+}
+
+@media (max-width: 600px) {
+	.zair-combo {
+		padding: 14px 12px 12px;
+	}
+
+	.zair-combo-label {
+		padding-left: 10px;
+		gap: 9px;
+	}
+
+	.zair-combo-media {
+		width: 38px;
+		height: 38px;
+	}
+
+	.zair-combo-name {
+		font-size: .78rem;
+	}
+
+	.zair-combo-btn {
+		min-width: 0;
+		width: 100%;
+	}
+}
+
+/* ===============================================================
+ * Tarjetas compactas
+ * La imagen a proporción 4:3 en vez de cuadrada reduce bastante la
+ * altura de la sección sin recortar el producto, y los repuestos
+ * se fotografían apaisados.
+ * ============================================================ */
+
+.zair-card-media {
+	aspect-ratio: 4 / 3;
+}
+
+.zair-card-body {
+	padding: 9px 10px 10px;
+	gap: 6px;
+}
+
+.zair-card-name {
+	font-size: .78rem;
+	line-height: 1.3;
+}
+
+.zair-badge-compatible {
+	font-size: .66rem;
+	padding: 1px 6px;
+}
+
+.zair-card-price {
+	font-size: .88rem;
+}
+
+.zair-card-price del {
+	font-size: .74rem;
+	margin-right: 3px;
+}
+
+.zair-flag-oferta {
+	top: 6px;
+	left: 6px;
+	font-size: .6rem;
+	padding: 2px 6px;
+}
+
+.zair-btn {
+	padding: 7px 9px;
+	font-size: .74rem;
+	border-radius: 5px;
+}
+
+.zair-cart-link {
+	font-size: .7rem;
+	margin-top: 4px;
+}
+
+.zair-title {
+	font-size: 1.18rem;
+}
+
+.zair-nav {
+	width: 32px;
+	height: 32px;
+	font-size: 1rem;
+}
+
+/* Dos acciones por tarjeta: cotizar como principal, comprar debajo. */
+
+.zair-card-actions {
+	display: grid;
+	gap: 5px;
+}
+
+.zair-btn-cotizar,
+.zair-btn-quote {
+	background: #fe5200;
+	border-color: #fe5200;
+	color: #fff;
+}
+
+.zair-btn-cotizar:hover,
+.zair-btn-quote:hover {
+	filter: brightness(.94);
+	opacity: 1;
+}
+
+@media (max-width: 1199px) {
+	.zair-recommendations {
+		--zair-cols: 4;
+	}
+}
+
+@media (max-width: 900px) {
+	.zair-recommendations {
+		--zair-cols: 3;
+	}
+}
+
+@media (max-width: 680px) {
+	.zair-recommendations {
+		--zair-cols: 2.2;
+	}
+}
+
+@media (max-width: 480px) {
+	.zair-recommendations {
+		--zair-cols:  3 !important;
+	}
+
+	.zair-card-name {
+		font-size: .75rem;
+	}
+}
+
+/* ===============================================================
+ * Cotización acumulada
+ * El cliente va sumando repuestos con el botón «+» y al final pide
+ * una sola cotización con todos, en lugar de consultar uno por uno.
+ * ============================================================ */
+
+.zair-add-quote {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	width: 100%;
+	padding: 8px 10px;
+	font-family: inherit;
+	font-size: .74rem;
+	font-weight: 700;
+	letter-spacing: .02em;
+	color: #fe5200;
+	background: #fff;
+	border: 1.5px solid #fe5200;
+	border-radius: 6px;
+	cursor: pointer;
+	transition: background .15s ease, color .15s ease;
+}
+
+.zair-add-quote:hover {
+	background: #fff3ec;
+}
+
+.zair-add-icon {
+	font-size: 1.05rem;
+	line-height: 1;
+	font-weight: 700;
+}
+
+.zair-add-quote.is-added {
+	background: #1a7f47;
+	border-color: #1a7f47;
+	color: #fff;
+}
+
+.zair-add-quote.is-added:hover {
+	background: #176b3c;
+}
+
+/* Barra de resumen */
+
+.zair-quote-bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin-top: 14px;
+	padding: 12px 14px;
+	background: #fff8f4;
+	border: 1px solid #ffd4bd;
+	border-radius: 8px;
+}
+
+.zair-quote-bar[hidden] {
+	display: none;
+}
+
+.zair-quote-info {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-wrap: wrap;
+}
+
+.zair-quote-count {
+	font-size: .84rem;
+	font-weight: 700;
+	color: #b33a00;
+}
+
+.zair-quote-clear {
+	background: none;
+	border: 0;
+	padding: 0;
+	font-family: inherit;
+	font-size: .74rem;
+	color: #9aa1ab;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.zair-quote-clear:hover {
+	color: #666;
+}
+
+.zair-quote-cta {
+	flex: 1 1 auto;
+	min-width: 200px;
+	max-width: 320px;
+	padding: 12px 22px;
+	background: #fe5200;
+	color: #fff;
+	border: 0;
+	border-radius: 7px;
+	font-family: inherit;
+	font-size: .82rem;
+	font-weight: 700;
+	letter-spacing: .03em;
+	cursor: pointer;
+	box-shadow: 0 3px 12px rgba(254, 82, 0, .26);
+}
+
+.zair-quote-cta:hover {
+	filter: brightness(.94);
+}
+
+@media (max-width: 600px) {
+	.zair-quote-bar {
+		flex-direction: column;
+		align-items: stretch;
+		gap: 10px;
+	}
+
+	.zair-quote-cta {
+		max-width: none;
+		width: 100%;
+	}
+
+	.zair-add-text {
+		display: none; /* En móvil basta el símbolo. */
+	}
+}
+
+.zair-quote-hint {
+	font-size: .76rem;
+	color: #b33a00;
+	opacity: .82;
+	line-height: 1.4;
+}

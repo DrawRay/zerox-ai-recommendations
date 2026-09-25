@@ -1,0 +1,456 @@
+/* Zerox AI Recommendations - estilos del panel admin.
+   Namespace .zair-* para no afectar otras pantallas. */
+
+.zair-wrap .zair-meta {
+	color: #646970;
+	margin: 4px 0 18px;
+}
+
+.zair-wrap .zair-table {
+	max-width: 900px;
+	margin-bottom: 24px;
+}
+
+.zair-badge {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 3px;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.8;
+}
+
+.zair-badge-ok {
+	background: #edfaef;
+	color: #00753e;
+	border: 1px solid #b8e6c1;
+}
+
+.zair-badge-error {
+	background: #fcf0f1;
+	color: #b32d2e;
+	border: 1px solid #f0b8b8;
+}
+
+.zair-badge-pending {
+	background: #f0f6fc;
+	color: #2271b1;
+	border: 1px solid #c5d9ed;
+}
+
+.zair-placeholder {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #2271b1;
+	padding: 16px 20px;
+	max-width: 700px;
+}
+
+.zair-req {
+	color: #b32d2e;
+}
+
+.zair-delete {
+	color: #b32d2e;
+}
+
+/* --- Buscador AJAX de productos (Fase 4) --- */
+
+#zair-product-results {
+	max-width: 480px;
+}
+
+.zair-product-results-list {
+	margin: 6px 0 0;
+	padding: 0;
+	list-style: none;
+	border: 1px solid #c3c4c7;
+	border-radius: 3px;
+	max-height: 280px;
+	overflow-y: auto;
+	background: #fff;
+}
+
+.zair-product-result {
+	padding: 8px 12px;
+	cursor: pointer;
+	border-bottom: 1px solid #f0f0f1;
+	display: block;
+}
+
+.zair-product-result:last-child {
+	border-bottom: 0;
+}
+
+.zair-product-result:hover,
+.zair-product-result:focus {
+	background: #f0f6fc;
+	outline: 2px solid #2271b1;
+	outline-offset: -2px;
+}
+
+.zair-product-meta {
+	display: block;
+	color: #646970;
+	font-size: 12px;
+	margin-top: 2px;
+}
+
+.zair-searching {
+	color: #646970;
+	font-style: italic;
+	margin: 6px 0;
+}
+
+.zair-selected-product {
+	background: #edfaef;
+	border: 1px solid #b8e6c1;
+	border-radius: 3px;
+	padding: 8px 12px;
+	margin-bottom: 8px;
+	max-width: 480px;
+}
+
+/* ===============================================================
+ * v1.5 — Analítica visual
+ * Gráficos con CSS: sin librerías externas que carguen el panel.
+ * ============================================================ */
+
+.zair-analytics h2 {
+	font-size: 15px;
+	margin: 0 0 14px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eef0f3;
+	color: #1d2327;
+}
+
+.zair-periodo {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex-wrap: wrap;
+	margin: 14px 0 20px;
+}
+
+.zair-fechas {
+	color: #787c82;
+	font-size: 13px;
+}
+
+/* --- Tarjetas de resumen --- */
+
+.zair-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+	gap: 14px;
+	margin-bottom: 20px;
+	max-width: 1200px;
+}
+
+.zair-card {
+	background: #fff;
+	border: 1px solid #e2e5ea;
+	border-radius: 8px;
+	padding: 18px 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 3px;
+	border-top: 3px solid #c3c4c7;
+}
+
+.zair-card-azul    { border-top-color: #1f3a5f; }
+.zair-card-naranja { border-top-color: #fe5200; }
+.zair-card-verde   { border-top-color: #1a7f47; }
+.zair-card-gris    { border-top-color: #8a8f98; }
+
+.zair-card-valor {
+	font-size: 28px;
+	font-weight: 700;
+	line-height: 1.1;
+	color: #1d2327;
+}
+
+.zair-card-label {
+	font-size: 13px;
+	color: #50575e;
+	line-height: 1.35;
+}
+
+.zair-card-detalle {
+	font-size: 12px;
+	color: #8a8f98;
+	margin-top: 2px;
+}
+
+/* --- Paneles --- */
+
+.zair-panel {
+	background: #fff;
+	border: 1px solid #e2e5ea;
+	border-radius: 8px;
+	padding: 18px 20px 16px;
+	margin-bottom: 18px;
+	max-width: 1200px;
+}
+
+.zair-cols {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 18px;
+	max-width: 1200px;
+}
+
+.zair-cols .zair-panel {
+	max-width: none;
+	margin-bottom: 0;
+}
+
+.zair-cols + .zair-panel,
+.zair-cols + .zair-cols {
+	margin-top: 18px;
+}
+
+@media (max-width: 1100px) {
+	.zair-cols {
+		grid-template-columns: 1fr;
+	}
+}
+
+/* --- Embudo --- */
+
+.zair-funnel-row {
+	margin-bottom: 13px;
+}
+
+.zair-funnel-head {
+	display: flex;
+	justify-content: space-between;
+	align-items: baseline;
+	gap: 10px;
+	margin-bottom: 4px;
+}
+
+.zair-funnel-label {
+	font-size: 13px;
+	color: #3c434a;
+}
+
+.zair-funnel-num {
+	font-size: 15px;
+	font-weight: 700;
+	color: #1d2327;
+}
+
+.zair-funnel-track {
+	height: 9px;
+	background: #f0f2f5;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.zair-funnel-bar {
+	height: 100%;
+	background: linear-gradient(90deg, #1f3a5f, #2f5a8f);
+	border-radius: 5px;
+	min-width: 2px;
+}
+
+.zair-funnel-pct {
+	display: block;
+	margin-top: 3px;
+	font-size: 11px;
+	color: #8a8f98;
+}
+
+/* --- Tabla de indicadores --- */
+
+.zair-kpi-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.zair-kpi-table td {
+	padding: 8px 0;
+	border-bottom: 1px solid #f0f2f5;
+	font-size: 13px;
+	vertical-align: middle;
+}
+
+.zair-kpi-table tr:last-child td {
+	border-bottom: 0;
+}
+
+.zair-kpi-nombre {
+	color: #3c434a;
+}
+
+.zair-kpi-valor {
+	font-weight: 700;
+	color: #1d2327;
+	width: 90px;
+	text-align: right;
+	white-space: nowrap;
+}
+
+.zair-kpi-formula {
+	color: #9aa1ab;
+	font-size: 11px;
+	text-align: right;
+	padding-left: 14px;
+}
+
+/* --- Tablas con barra --- */
+
+.zair-tabla {
+	width: 100%;
+	border-collapse: collapse;
+	font-size: 13px;
+}
+
+.zair-tabla th {
+	text-align: left;
+	padding: 8px 10px 8px 0;
+	border-bottom: 1px solid #e2e5ea;
+	font-size: 12px;
+	color: #787c82;
+	font-weight: 600;
+}
+
+.zair-tabla td {
+	padding: 9px 10px 9px 0;
+	border-bottom: 1px solid #f4f5f7;
+	vertical-align: middle;
+}
+
+.zair-tabla tr:last-child td {
+	border-bottom: 0;
+}
+
+.zair-th-bar {
+	width: 34%;
+}
+
+.zair-num {
+	text-align: right;
+	white-space: nowrap;
+	width: 78px;
+}
+
+.zair-destacado {
+	font-weight: 700;
+	color: #fe5200;
+}
+
+.zair-vend-nombre {
+	font-weight: 600;
+	color: #1d2327;
+}
+
+.zair-bar-track {
+	height: 8px;
+	background: #f0f2f5;
+	border-radius: 4px;
+	overflow: hidden;
+	min-width: 60px;
+}
+
+.zair-bar {
+	height: 100%;
+	background: #1f3a5f;
+	border-radius: 4px;
+}
+
+.zair-bar-alt {
+	background: #fe5200;
+}
+
+/* --- Gráfico de columnas --- */
+
+.zair-chart {
+	display: flex;
+	align-items: flex-end;
+	gap: 6px;
+	height: 190px;
+	padding: 10px 0 0;
+	overflow-x: auto;
+}
+
+.zair-chart-col {
+	flex: 1 1 0;
+	min-width: 26px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+}
+
+.zair-chart-bars {
+	flex: 1 1 auto;
+	width: 100%;
+	display: flex;
+	align-items: flex-end;
+	justify-content: center;
+	gap: 2px;
+}
+
+.zair-chart-bar {
+	width: 42%;
+	max-width: 16px;
+	border-radius: 3px 3px 0 0;
+	transition: opacity .15s ease;
+}
+
+.zair-chart-col:hover .zair-chart-bar {
+	opacity: .78;
+}
+
+.zair-bar-imp {
+	background: #1f3a5f;
+}
+
+.zair-bar-cli {
+	background: #fe5200;
+}
+
+.zair-chart-x {
+	margin-top: 6px;
+	font-size: 10px;
+	color: #8a8f98;
+	white-space: nowrap;
+}
+
+.zair-leyenda {
+	display: flex;
+	gap: 18px;
+	margin-top: 10px;
+	font-size: 12px;
+	color: #50575e;
+}
+
+.zair-dot {
+	display: inline-block;
+	width: 9px;
+	height: 9px;
+	border-radius: 2px;
+	margin-right: 5px;
+	vertical-align: middle;
+}
+
+.zair-dot-imp { background: #1f3a5f; }
+.zair-dot-cli { background: #fe5200; }
+
+/* --- Auxiliares --- */
+
+.zair-nota {
+	margin: 12px 0 0;
+	font-size: 12px;
+	color: #8a8f98;
+	line-height: 1.55;
+}
+
+.zair-export {
+	display: flex;
+	gap: 8px;
+	flex-wrap: wrap;
+	margin: 0 0 6px;
+}
